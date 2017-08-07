@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Author(models.Model):
@@ -19,3 +20,9 @@ class Article(models.Model):
     modify_time = models.DateTimeField()
     author = models.ForeignKey(Author,on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag,blank=True)
+
+    def __unicode__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("blog:detail",kwargs={'pk':self.pk})

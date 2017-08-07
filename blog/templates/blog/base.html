@@ -26,6 +26,7 @@
 
     <!-- django_blog css  -->
     <link href="{% static 'blog/css/django-blog.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/css/code.css' %}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,22 +48,22 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="{% url 'index' %}">Life is short</a>
+                <a class="navbar-brand" href="{% url 'blog:index' %}">您是本站第1位访客</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="{% url 'index'%}">Home</a>
+                        <a href="{% url 'blog:index'%}">Home</a>
                     </li>
                     <li>
-                        <a href="{% url 'about' %}">About</a> </li>
+                        <a href="{% url 'blog:about' %}">About</a> </li>
                     <li>
-                        <a href="{% url 'blog_post' %}">Sample Post</a>
+                        <a href="{% url 'blog:contact'%}">Contact</a>
                     </li>
                     <li>
-                        <a href="{% url 'contact'%}">Contact</a>
+                        <a href="#">login</a>
                     </li>
                 </ul>
             </div>

@@ -23,13 +23,17 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 {% for article in article_list %}
                 <div class="post-preview">
-                    <a href="{% url 'blog_post' %}">
+                    <a href="{{ article.get_absolute_url }}">
                         <h2 class="post-title">
                             {{ article.title }}
                         </h2>
                         <h3 class="post-subtitle">
                             {{ article.abstract }}
                         </h3>
+                        <h4 class="post-subtitle">
+                            分类: xxx
+                        </h4>
+
                     </a>
                     <p class="post-meta">Posted by <a href="#">{{ article.author.name }}</a> {{ article.create_time }}</p>
                 </div>
