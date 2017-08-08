@@ -36,7 +36,7 @@
                 分类: {{ article.category }}
             </h5>
         </a>
-        <p class="post-meta">阅读量:{{ article.read_count }},Posted by <a href="#">{{ article.author.name }}</a> {{ article.create_time }}</p>
+        <p class="post-meta">阅读量:{{ article.read_count }},评论数:{{ article.comment_set.count }},Posted by <a href="#">{{ article.author.name }}</a> {{ article.create_time }}</p>
         <div class="post-meta">
             {{ article.content|safe }}
         </div>
