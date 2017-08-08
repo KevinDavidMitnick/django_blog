@@ -33,9 +33,15 @@ class Article(models.Model):
     author = models.ForeignKey(Author,on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag,blank=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    read_count = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse("blog:detail",kwargs={'pk':self.pk})
+
+    def increase_readcnt(self):
+        self.read_count += 1
+        self.save(update_fields=['read_count'])
+

@@ -17,6 +17,7 @@ def about(request):
 
 def detail(request,pk):
     article = get_object_or_404(Article,pk=pk)
+    article.increase_readcnt()
     article.content = markdown.markdown(article.content,extensions= [
         'markdown.extensions.extra','markdown.extensions.codehilite','markdown.extensions.toc'])
     form = CommentForm(request.POST)
