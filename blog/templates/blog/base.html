@@ -49,7 +49,9 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="{% url 'blog:index' %}">您是本站第1位访客</a>
+                <a class="navbar-brand" href="{% url 'blog:index' %}">
+                {% if user.is_authenticated %} {{ user }},您是本站第{{ user.pk }}位用户{% endif %}
+                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -64,7 +66,11 @@
                         <a href="{% url 'blog:contact'%}">Contact</a>
                     </li>
                     <li>
-                        <a href="#">login</a>
+                        {% if not user.is_authenticated %}
+                        <a href="/users/login/?next={{ request.path }}">login</a>
+                        {% else %}
+                        <a href="/users/logout/?next=/">logout</a>
+                        {% endif %}
                     </li>
                 </ul>
             </div>
