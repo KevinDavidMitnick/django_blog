@@ -98,6 +98,17 @@
                 暂无文章分类
                 {% endfor %}
                 </div>
+
+                {% get_tags as tags %}
+                <div class="list-group">
+                {% for tag in tags %}
+                <a href="#" class="list-group-item">
+                    {{ tag }}({{ tag.num_articles }})
+                </a>
+                {% empty %}
+                暂无文章分类
+                {% endfor %}
+                </div>
             </div>
             {% block main %}
             {% endblock %}
