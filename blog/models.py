@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.urls import reverse
+import markdown
+from django.utils.html import strip_tags
 
 # Create your models here.
 class Category(models.Model):
@@ -26,7 +28,7 @@ class Tag(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=255)
-    abstract = models.CharField(max_length=255)
+    abstract = models.CharField(max_length=255,blank=True)
     content = models.TextField()
     create_time = models.DateTimeField(auto_now_add=True)
     modify_time = models.DateTimeField(auto_now_add=True)
@@ -45,3 +47,11 @@ class Article(models.Model):
         self.read_count += 1
         self.save(update_fields=['read_count'])
 
+    def save(self,*args,**kwargs):
+        if not self.abstract:
+            md = markdown.Markdown(extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite',
+            ])
+            self.abstract = strip_tags(md.convert(self.content))[:54]
+        super(Article,self).save(*args,**kwargs)
