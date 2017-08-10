@@ -44,8 +44,13 @@ def about(request):
 def detail(request,pk):
     article = get_object_or_404(Article,pk=pk)
     article.increase_readcnt()
-    article.content = markdown.markdown(article.content,extensions= [
-        'markdown.extensions.extra','markdown.extensions.codehilite','markdown.extensions.toc'])
+    md = markdown.Markdown(extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        'markdown.extensions.toc'
+    ])
+    article.content = md.convert(article.content)
+    article.toc = md.toc
     form = CommentForm(request.POST)
     comment_list = article.comment_set.all()
     context = { 'article' : article,

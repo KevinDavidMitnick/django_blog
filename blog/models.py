@@ -52,6 +52,7 @@ class Article(models.Model):
             md = markdown.Markdown(extensions=[
                 'markdown.extensions.extra',
                 'markdown.extensions.codehilite',
+                'markdown.extensions.toc'
             ])
             self.abstract = strip_tags(md.convert(self.content))[:54]
         super(Article,self).save(*args,**kwargs)
