@@ -91,11 +91,11 @@
                 {% get_categories as categories %}
                 <div class="list-group">
                 {% for category in categories %}
-                <a href="{% url 'blog:index' category.pk %}" class="list-group-item">
+                <a href="{% url 'blog:category' category.pk %}" class="list-group-item">
                     <button class="btn btn-primary" style="width:100%">
                         {{ category }}
                         <span class="badge">
-                        ({{ category.article_set.count}})
+                        {{ category.article_set.count}}
                         </span>
                     </button>
                 </a>
@@ -107,7 +107,7 @@
                 {% get_tags as tags %}
                 <div class="list-group">
                 {% for tag in tags %}
-                <a href="#" class="list-group-item">
+                <a href="{% url 'blog:tag' tag.pk %}" class="list-group-item">
                     <span class="label label-default">{{ tag }}({{ tag.num_articles }})</span>
                 </a>
                 {% empty %}
