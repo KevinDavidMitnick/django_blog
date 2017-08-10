@@ -2,8 +2,10 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .models import Article,Category,Tag
 import markdown
 from comments.forms import CommentForm
+from markdown.extensions.toc import TocExtension
 
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from django.utils.text import slugify
 
 # Create your views here.
 def index(request):
@@ -47,7 +49,7 @@ def detail(request,pk):
     md = markdown.Markdown(extensions=[
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',
-        'markdown.extensions.toc'
+        TocExtension(slugify=slugify)
     ])
     article.content = md.convert(article.content)
     article.toc = md.toc
