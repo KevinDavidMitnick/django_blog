@@ -17,7 +17,6 @@
     </header>
 {% endblock header %}
 {% block main %}
-    {% get_recent_articles as article_list %}
     <div class="col-lg-8 col-md-10">
     {% for article in article_list %}
         <div class="post-preview">
