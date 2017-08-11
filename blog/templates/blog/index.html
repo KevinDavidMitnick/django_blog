@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load tags %}
 {% block header %}
     <!-- Set your background image for this header on the line below. -->
     <header class="intro-header bg-img">
@@ -16,42 +17,36 @@
     </header>
 {% endblock header %}
 {% block main %}
+    {% get_recent_articles as article_list %}
+    <div class="col-lg-8 col-md-10">
+    {% for article in article_list %}
+        <div class="post-preview">
+            <a href="{{ article.get_absolute_url }}">
+                <h2 class="post-title">
+                    {{ article.title }}
+                </h2>
+                <h3 class="post-subtitle">
+                    {{ article.abstract }}
+                </h3>
+                <h4 class="post-subtitle">
+                    分类: {{ article.category }}
+                </h4>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                {% for article in article_list %}
-                <div class="post-preview">
-                    <a href="{{ article.get_absolute_url }}">
-                        <h2 class="post-title">
-                            {{ article.title }}
-                        </h2>
-                        <h3 class="post-subtitle">
-                            {{ article.abstract }}
-                        </h3>
-                        <h4 class="post-subtitle">
-                            分类: xxx
-                        </h4>
-
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">{{ article.author.name }}</a> {{ article.create_time }}</p>
-                </div>
-                {% empty %}
-                <div class="post-preview">
-                    暂时还没有发布的文章!
-                </div>
-                <hr>
-                {% endfor %}
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="next">
-                        <a href="#">Older Posts &rarr;</a>
-                    </li>
-                </ul>
-            </div>
+            </a>
+            <p class="post-meta">Posted by <a href="#">{{ article.author.name }}</a> {{ article.create_time }}</p>
         </div>
-    </div>
-
+    {% empty %}
+        <div class="post-preview">
+            暂时还没有发布的文章!
+        </div>
+        <hr>
+        {% endfor %}
+        <!-- Pager -->
+        <ul class="pager">
+            <li class="next">
+                <a href="#">Older Posts &rarr;</a>
+            </li>
+        </ul>
+     </div>
 {% endblock main %}
 

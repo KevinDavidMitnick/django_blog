@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,8 +79,24 @@
     {% endblock %}
 
     <!-- Main Content -->
-    {% block main %}
-    {% endblock main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                {% get_categories as categories %}
+                <div class="list-group">
+                {% for category in categories %}
+                <a href="#" class="list-group-item">
+                    {{ category }}
+                </a>
+                {% empty %}
+                暂无文章分类
+                {% endfor %}
+                </div>
+            </div>
+            {% block main %}
+            {% endblock %}
+        </div>
+    </div>
     <hr>
 
     <!-- Footer -->
