@@ -60,13 +60,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <form action="{%url 'haystack_search' %}" method="get">
-                            <input type="search" name="q"/>
-                            <button type="submit">搜索</span></button>
-                        </form>
-                    </li>
+                <ul class="nav navbar-nav navbar-left">
                     <li>
                         <a href="{% url 'blog:index'%}">Home</a>
                     </li>
@@ -75,13 +69,30 @@
                     <li>
                         <a href="{% url 'blog:contact'%}">Contact</a>
                     </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <li>
-                        {% if not user.is_authenticated %}
-                        <a href="/users/login/?next={{ request.path }}">login</a>
-                        {% else %}
-                        <a href="/users/logout/?next=/">logout</a>
-                        {% endif %}
+                        <a href="#">
+                        <form action="{%url 'haystack_search' %}" method="get">
+                            <input type="search" name="q" placeholder="search blog" class="form-control header-search-input js-site-search-focus" />
+                        </form>
+                        </a>
                     </li>
+                    {% if not user.is_authenticated %}
+                    <li>
+                        <a href="/users/login/?next={{ request.path }}">Sign in</a> 
+                    </li>
+                    <li>
+                        <a href="#">Or</a>
+                    </li>
+                    <li>
+                        <a href="/users/register/?next={{ request.path }}">Sign up</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="/users/logout/?next=/">logout</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
