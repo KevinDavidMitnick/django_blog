@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'comments.apps.CommentsConfig',
     'users.apps.UsersConfig',
+    'haystack'
 ]
 
 MIDDLEWARE = [
@@ -134,4 +135,12 @@ AUTHENTICATION_BACKENDS = (
 
 )
 
-
+# haystack
+HAYSTACK_CONNECTIONS = {
+    'default' : {
+        'ENGINE' : 'blog.whoosh_cn_backend.WhooshEngine',
+        'PATH'   : os.path.join(BASE_DIR,'whoosh_index'),
+    },
+}
+HYSTACK_SEARCH_RESULTS_PER_PAGE = 3
+HYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

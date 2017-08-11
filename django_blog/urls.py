@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^comments/', include('comments.urls')),
     url(r'^users/', include('users.urls')),
     url(r'^users/', include('django.contrib.auth.urls')),
+    url(r'^search/', include('haystack.urls')),
 ]
