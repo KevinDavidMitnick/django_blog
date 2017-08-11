@@ -4,13 +4,25 @@ from django.db import models
 from django.urls import reverse
 
 # Create your models here.
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.name
+
 class Author(models.Model):
     name  = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     email = models.EmailField()
 
+    def __unicode__(self):
+        return self.name
+
 class Tag(models.Model):
     name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.name
 
 class Article(models.Model):
     title = models.CharField(max_length=255)
@@ -20,6 +32,7 @@ class Article(models.Model):
     modify_time = models.DateTimeField()
     author = models.ForeignKey(Author,on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag,blank=True)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.title
