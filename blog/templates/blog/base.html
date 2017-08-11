@@ -12,6 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <title>Clean Blog</title>
 
     <!-- Bootstrap Core CSS -->
@@ -36,6 +37,12 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <style>
+     span.highlighted {
+         color: red;
+     }
+    </style>
+
 </head>
 
 <body>
@@ -49,14 +56,17 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="{% url 'blog:index' %}">
-                {% if user.is_authenticated %} {{ user }},您是本站第{{ user.pk }}位用户{% endif %}
-                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form action="{%url 'haystack_search' %}" method="get">
+                            <input type="search" name="q"/>
+                            <button type="submit">搜索</span></button>
+                        </form>
+                    </li>
                     <li>
                         <a href="{% url 'blog:index'%}">Home</a>
                     </li>

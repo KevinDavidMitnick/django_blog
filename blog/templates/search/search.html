@@ -1,0 +1,68 @@
+{% extends 'blog/base.html' %}
+{% load highlight %}
+
+{% block header %}
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header bg-img">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Clean Blog</h1>
+                        <hr class="small">
+                        <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock header %}
+
+{% block main %}
+    <div class="col-lg-8 col-md-10">
+    {% if query %}
+        {% for result in page.object_list %}
+        <div class="post-preview">
+            <a href="{{ result.object.get_absolute_url }}">
+                <h2 class="post-title">
+                    {% highlight result.object.title with query %}
+                </h2>
+                <h3 class="post-subtitle">
+                    {% highlight result.object.abstract with query %}
+                </h3>
+                <h4 class="post-subtitle">
+                    分类: {% highlight result.object.category  with query %}
+                </h4>
+                <h4 class="post-subtitle">
+                    {% highlight result.object.content  with query %}
+                </h4>
+            </a>
+            <p class="post-meta">阅读量:{{ result.object.read_count }},评论数:{{ result.object.comment_set.count }},Posted by <a href="#">{{ result.object.author.name }}</a> {{ result.object.create_time }}</p>
+        </div>
+    {% empty %}
+        <div class="post-preview">
+            暂时还没有发布的文章!
+        </div>
+        <hr>
+        {% endfor %}
+        <!-- Page -->
+        <ul class="pager">
+            {% if page.has_previous %}
+            <li>
+                <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">&larr; 上一页 </a>
+            </li>
+            {% endif %}
+            <li>
+                <a href="#">{{ page.number }}/{{ page.paginator.num_pages }}页</a>
+            </li>
+            {% if page.has_next %}
+            <li>
+                <a href="?q={{ query }}&amp;page={{ page.next_page_number }}">下一页 &rarr;</a>
+            </li>
+            {% endif %}
+        </ul>
+     </div>
+    {% else %}
+        请输入搜索关键词，例如 django
+    {% endif %}
+{% endblock main %}
