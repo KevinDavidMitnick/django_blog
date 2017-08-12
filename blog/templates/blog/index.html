@@ -5,7 +5,7 @@
     <header class="intro-header bg-img">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-lg-7 col-lg-offset-3 col-md-9 col-md-offset-1">
                     <div class="site-heading">
                         <h1>Clean Blog</h1>
                         <hr class="small">
@@ -17,7 +17,7 @@
     </header>
 {% endblock header %}
 {% block main %}
-    <div class="col-lg-8 col-md-10">
+    <div class="col-lg-7 col-md-9">
     {% for article in pager.object_list %}
         <div class="post-preview">
             <a href="{{ article.get_absolute_url }}">

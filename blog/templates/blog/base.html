@@ -48,7 +48,7 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <nav class="navbar-collapse collapse navbar navbar-fixed-top" style="background-color:#FFFFFF;"role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
@@ -94,7 +94,7 @@
                     </li>
                     {% endif %}
                 </ul>
-            </div>
+                </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
@@ -108,7 +108,7 @@
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-2 col-md-2">
+            <div class="col-lg-3 col-md-3">
                 {% get_categories as categories %}
                 <div class="list-group">
                 {% for category in categories %}
@@ -126,9 +126,9 @@
                 </div>
 
                 {% get_tags as tags %}
-                <div class="list-group">
+                <div class="list-group" id="tagscloud">
                 {% for tag in tags %}
-                <a href="{% url 'blog:tag' tag.pk %}" class="list-group-item">
+                <a href="{% url 'blog:tag' tag.pk %}">
                     <span class="label label-default">{{ tag }}({{ tag.num_articles }})</span>
                 </a>
                 {% empty %}
@@ -148,7 +148,7 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-lg-7 col-lg-offset-2 col-md-9 col-md-offset-1">
                     <ul class="list-inline text-center">
                         <li>
                             <a href="#">
@@ -194,6 +194,49 @@
     <!-- Theme JavaScript -->
     <script src="{% static 'blog/js/clean-blog.min.js' %}"></script>
 
-</body>
 
+    <!-- tags script -->
+    <script src="{% static 'blog/js/tag.min.js' %}"></script>
+
+</body>
+<script>
+  var i=0;
+  var oTag=null;
+  oDiv=document.getElementById('tagscloud');
+  aA=oDiv.getElementsByTagName('a');
+  for(i=0;i<aA.length;i++)
+  {
+    oTag={};
+    aA[i].onmouseover = (function (obj) {
+      return function () {
+        obj.on = true;
+        this.style.zIndex = 9999;
+        this.style.color = '#fff';
+        this.style.padding = '5px 5px';
+        this.style.filter = "alpha(opacity=100)";
+        this.style.opacity = 1;
+      }
+    })(oTag)
+    aA[i].onmouseout = (function (obj) {
+      return function () {
+        obj.on = false;
+        this.style.zIndex = obj.zIndex;
+        this.style.color = '#fff';
+        this.style.padding = '0 5px';
+        this.style.filter = "alpha(opacity=" + 100 * obj.alpha + ")";
+        this.style.opacity = obj.alpha;
+        this.style.zIndex = obj.zIndex;
+      }
+    })(oTag)
+    oTag.offsetWidth = aA[i].offsetWidth;
+    oTag.offsetHeight = aA[i].offsetHeight;
+    mcList.push(oTag);
+  }
+  sineCosine( 0,0,0 );
+  positionAll();
+  (function () {
+    update();
+    setTimeout(arguments.callee, 40);
+  })();
+</script>
 </html>
