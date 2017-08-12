@@ -19,24 +19,6 @@
 <!-- Post Content -->
 <div class="col-lg-7 col-md-9">
     <div class="post-preview">
-        <a href="{{ article.get_absolute_url }}">
-            <h2 class="post-title">
-                {{ article.title }}
-            </h2>
-            <h3 class="post-subtitle">
-                {{ article.abstract }}
-            </h3>
-            <h4 class="post-subtitle">
-                标签:
-                {% for tag in article.tags.all %}
-                {{ tag.name }}
-                {% endfor %}
-            </h4>
-            <h5 class="post-subtitle">
-                分类: {{ article.category }}
-            </h5>
-        </a>
-        <p class="post-meta">阅读量:{{ article.read_count }},评论数:{{ article.comment_set.count }},Posted by <a href="#">{{ article.author.name }}</a> {{ article.create_time }}</p>
         <div class="post-meta">
             {{ article.content|safe }}
         </div>

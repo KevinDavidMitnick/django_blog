@@ -27,12 +27,8 @@
                 <h3 class="post-subtitle">
                     {{ article.abstract }}
                 </h3>
-                <h4 class="post-subtitle">
-                    分类: {{ article.category }}
-                </h4>
-
             </a>
-            <p class="post-meta">阅读量:{{ article.read_count }},评论数:{{ article.comment_set.count }},Posted by <a href="#">{{ article.author.name }}</a> {{ article.create_time }}</p>
+            <p class="post-meta">阅读量:{{ article.read_count }},评论数:{{ article.comment_set.count }},Posted by <a href="#">{{ article.author.name }}</a> {{ article.create_time }} <a href="{% url 'blog:category' article.category.pk %}"><span class="label label-primary">{{ article.category }}</span></a>{% for tag in article.tags.all %}<a href="{% url 'blog:tag' tag.pk %}"><span class="label label-default">{{ tag.name }}</span></a>{% endfor %}</p>
         </div>
     {% empty %}
         <div class="post-preview">
