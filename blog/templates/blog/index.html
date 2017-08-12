@@ -18,6 +18,12 @@
 {% endblock header %}
 {% block main %}
     <div class="col-lg-7 col-md-9">
+        <div class="alert alert-info" role="alert">
+            {% if user.is_authenticated %}
+            {{ user.username }},&nbsp;您是本站第{{ user.pk }}位用户,&nbsp;
+            {% endif %}
+            欢迎您回到本站!
+        </div>
     {% for article in pager.object_list %}
         <div class="post-preview">
             <a href="{{ article.get_absolute_url }}">
@@ -34,7 +40,6 @@
         <div class="post-preview">
             暂时还没有发布的文章!
         </div>
-        <hr>
         {% endfor %}
         <!-- Pager -->
         <ul class="pager">
