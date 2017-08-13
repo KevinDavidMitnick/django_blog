@@ -86,7 +86,7 @@
                         <a href="#">Or</a>
                     </li>
                     <li>
-                        <a href="/users/register/?next={{ request.path }}">Sign up</a>
+                        <a href="/users/register/?next={% url 'login' %}">Sign up</a>
                     </li>
                     {% else %}
                     <li>
