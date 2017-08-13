@@ -29,12 +29,14 @@ function showLoginForm(){
 function openLoginModal(){
     showLoginForm();
     setTimeout(function(){
+        $('#loginModal').modal({backdrop: 'static', keyboard: false});
         $('#loginModal').modal('show');
     }, 230);
 }
 function openRegisterModal(){
     showRegisterForm();
     setTimeout(function(){
+        $('#loginModal').modal({backdrop: 'static', keyboard: false});
         $('#loginModal').modal('show');
     }, 230);
 }
