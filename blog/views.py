@@ -53,10 +53,8 @@ def detail(request,pk):
     ])
     article.content = md.convert(article.content)
     article.toc = md.toc
-    form = CommentForm(request.POST)
     comment_list = article.comment_set.all()
     context = { 'article' : article,
-                'form' : form,
                 'comment_list' : comment_list}
     return render(request,'blog/post.html',context=context)
 

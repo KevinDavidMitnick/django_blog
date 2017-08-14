@@ -23,6 +23,18 @@
             {{ article.content|safe }}
         </div>
     </div>
+    <!-- Post Comment -->
+    <div class="row">
+        <form id="comment" class="form-horizontal" action="{% url 'comments:post_comment' article.pk %}" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+        <input type="text" name="text" class="form-control" placeholder="写入评论" aria-describedby="basic-addon2">
+        <span style="cursor:pointer;" onclick="javascript:document.forms.comment.submit();"class="input-group-addon" id="basic-addon2">点击发表</span>
+
+        </div>
+        </form>
+    </div>
+    <hr/>
     <!-- Comment List-->
     <div class="row">
         {% for comment in comment_list %}
@@ -30,41 +42,13 @@
             <div class="post-meta">
                 {{ comment.text }}
             </div>
-            <span class="post-meta">{{ comment.name }}</span>
+            <span class="post-meta">Posted by {{ comment.author }},</span>
             <span>{{ comment.create_time }}</span>
         </div>
+        <hr/>
         {% empty %}
             暂无评论!
         {% endfor %}
-    </div>
-    <!-- Post Comment -->
-    <div class="row">
-        <form class="form-horizontal" action="{% url 'comments:post_comment' article.pk %}" method="post">
-        {% csrf_token %}
-        <div>
-            <label for ="{{ form.name.id_for_label }}">名字:</label>
-            {{ form.name }}
-            {{ form.name.errors }}
-        </div>
-        <div>
-            <label for ="{{ form.email.id_for_label }}">邮箱:</label>
-            {{ form.email }}
-            {{ form.email.errors }}
-        </div>
-        <div>
-            <label for ="{{ form.url.id_for_label }}">URL:</label>
-            {{ form.url }}
-            {{ form.url.errors }}
-        </div>
-        <div>
-            <label for ="{{ form.text.id_for_label }}">评论:</label>
-            {{ form.text }}
-            {{ form.text.errors }}
-        </div>
-        <div>
-            <button type="submit" class="comment-btn">发表</button>
-        </div>
-        </form>
     </div>
 </div>
 {% endblock main %}
