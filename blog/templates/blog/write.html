@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+{% block header %}
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header about-img">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-lg-offset-3 col-md-9 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>About Me</h1>
+                        <hr class="small">
+                        <span class="subheading">This is what I do.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock header %}
+
+{% block left %}
+{% endblock left %}
+
+{% block main %}
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <form class="form-horizontal" method="post" action="{% url 'blog:write' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="category">分类:</label>
+                <input type="text" class="form-control" name="category" id="category" placeholder="输入文章分类">
+            </div>
+            <div class="form-group">
+                <label for="tag">标签:</label>
+                <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签">
+            </div>
+            <div class="form-group">
+                <label for="title">标题:</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="输入文章标题">
+            <div class="form-group">
+            <textarea data-provide="markdown" class="md-input form-control" rows="20" name="content"></textarea>
+            <button type="submit" class="btn btn-default">发表</button>
+            </div>
+            </form>
+    </div>
+{% endblock main %}
+

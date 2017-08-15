@@ -19,7 +19,7 @@ urlpatterns = [
     url(r'^(?P<cid>[0-9]*)/$', views.index,name="index"),
     url(r'^category/(?P<cid>[0-9]*)/$', views.category,name="category"),
     url(r'^tag/(?P<tid>[0-9]*)/$', views.tag,name="tag"),
-    url(r'^about/$', views.about,name="about"),
+    url(r'^write/$', views.write,name="write"),
     url(r'^post/(?P<pk>[0-9]+)/$', views.detail,name="detail"),
     url(r'^contact/$', views.contact,name="contact"),
 ]

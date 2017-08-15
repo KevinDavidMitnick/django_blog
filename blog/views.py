@@ -40,8 +40,23 @@ def tag(request,tid):
         pager = paginator.page(1)
     return render(request,'blog/index.html',context={'pager':pager})
 
-def about(request):
-    return render(request,'blog/about.html')
+def write(request):
+    if request.method == "POST":
+        category = Category()
+        category.name = request.POST.get("category")
+        tag = Tag()
+        tag_name = request.POST.get("tag")
+        tag =  Tag.objects.create(name=tag_name)
+        article = Article()
+        article.category = category
+        article.tags = tag
+        article.title = request.POST.get("title")
+        article.content = request.POST.get("content")
+        article.author = request.POST.user
+        article.save()
+        pass
+    else:
+        return render(request,'blog/write.html')
 
 def detail(request,pk):
     article = get_object_or_404(Article,pk=pk)
