@@ -34,7 +34,12 @@
         {% csrf_token %}
         <div class="input-group">
         <input type="text" name="text" class="form-control" placeholder="写入评论" aria-describedby="basic-addon2">
+
+        {% if not user.is_authenticated %}
+        <span style="cursor:pointer;" class="input-group-addon" id="basic-addon2" title="登录之后才能发表评论!">点击发表</span>
+        {% else %}
         <span style="cursor:pointer;" onclick="javascript:document.forms.comment.submit();"class="input-group-addon" id="basic-addon2">点击发表</span>
+        {% endif %}
 
         </div>
         </form>
