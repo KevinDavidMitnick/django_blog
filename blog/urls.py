@@ -21,5 +21,4 @@ urlpatterns = [
     url(r'^tag/(?P<tid>[0-9]*)/$', views.tag,name="tag"),
     url(r'^write/$', views.write,name="write"),
     url(r'^post/(?P<pk>[0-9]+)/$', views.detail,name="detail"),
-    url(r'^contact/$', views.contact,name="contact"),
 ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from .models import Article,Category,Tag
+from .models import Article,Category,Tag,Author
 import markdown
 from comments.forms import CommentForm
 from markdown.extensions.toc import TocExtension
@@ -42,19 +42,26 @@ def tag(request,tid):
 
 def write(request):
     if request.method == "POST":
-        category = Category()
-        category.name = request.POST.get("category")
-        tag = Tag()
+        category_name = request.POST.get("category")
+        category,_ = Category.objects.get_or_create(name=category_name)
+
         tag_name = request.POST.get("tag")
-        tag =  Tag.objects.create(name=tag_name)
+        tag,_ =  Tag.objects.get_or_create(name=tag_name)
+
+        username = request.user.username
+        password = request.user.password
+        email = request.user.email
+        author,_ = Author.objects.get_or_create(name=username,password=password,email=email)
+
         article = Article()
         article.category = category
-        article.tags = tag
         article.title = request.POST.get("title")
         article.content = request.POST.get("content")
-        article.author = request.POST.user
+        article.author = author
         article.save()
-        pass
+        article.tags.add(tag)
+        article.save()
+        return redirect(article)
     else:
         return render(request,'blog/write.html')
 
